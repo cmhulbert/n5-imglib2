@@ -12,8 +12,6 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Setup upterm session
-        uses: lhotari/action-upterm@v1
 
       - name: Cache m2 folder
         uses: actions/cache@v2
@@ -36,3 +34,7 @@ jobs:
         run: .github/setup.sh
       - name: Execute the build
         run: .github/build.sh
+
+      - name: Setup upterm session
+        if: ${{ failure() }}
+        uses: lhotari/action-upterm@v1
